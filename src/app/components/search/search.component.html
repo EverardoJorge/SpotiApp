@@ -1,0 +1,31 @@
+<div class="row">
+    <div class="col">
+        <input type="text" #term (keyup)="searchSong(term.value)" class="form-control" placeholder="Search song">
+    </div>
+</div>
+
+<app-loading *ngIf="loading"></app-loading>
+<!--
+<app-cards *ngIf="!loading" [items]="resultSong"></app-cards>
+-->
+
+<div *ngIf="!loading" class="card-columns m-5 animated fadeIn">
+    <div *ngFor="let track of resultSong" class="card">
+        <img [src]="track.album.images | noimage" class="card-img-top" alt="">
+        <div class="card-body">
+            <h5 class="card-title">{{track.name}}</h5>
+            <p class="card-text">
+                <span class="badge badge-pill badge-success">popularity {{track.popularity}}</span>
+                <!--
+                <span *ngFor="let artist of track.artists" class="badge badge-pill badge-success">{{artist.genders}}</span>
+                -->
+                <!--
+                    <audio *ngIf="track.preview_url" [src]="track.preview_url" controls></audio>
+                -->
+                <br><br>
+                <iframe [src]="track.uri | domseguro" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+            </p>
+
+        </div>
+    </div>
+</div>
